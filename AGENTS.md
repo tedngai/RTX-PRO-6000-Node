@@ -6,9 +6,11 @@ Blackwell vGPU node (single-GPU serving on GPU 0).
 
 ## Workflow
 
-- **Always commit changes.** After any change to files in this repository,
-  commit it with git using a descriptive message. Do not leave the working
-  tree dirty at the end of a task.
+- **Always commit and push changes.** After any change to files in this
+  repository, commit it with git using a descriptive message and push it to
+  `origin` immediately. Make frequent, small, incremental commits and pushes
+  rather than batching unrelated changes. Do not leave the working tree dirty
+  or commits unpushed at the end of a task.
 - After adding, removing, renaming, or materially changing files, regenerate
   `docs/package-manifest.json` (paths, sizes, SHA-256) before committing.
 - New experiment reports belong in `evidence/`, named by profile label and UTC
@@ -34,7 +36,20 @@ Blackwell vGPU node (single-GPU serving on GPU 0).
 
 ## Publishing
 
-- No public remote is configured yet. When one is added, use a credential
-  helper or an ignored `.env` file for the token. Never print the token, embed
-  it in a remote URL or command history, or stage it. Verify `.env` remains
-  untracked before pushing.
+- The public GitHub remote is `https://github.com/tedngai/RTX-PRO-6000-Node.git`
+  (remote name `origin`). Push with `git push origin main`.
+- **Credential location:** the GitHub PAT is stored in the repository-root
+  `.env` file — `/home/atadmin/vllmtest/.env`, variable name `GITHUB_PAT`.
+  The file is gitignored and must stay untracked (verify with
+  `git check-ignore .env` before committing).
+- A repo-local git credential helper (`.git/config` → `credential.helper`)
+  already reads the PAT from that file, so a plain `git push origin main` works
+  with no extra steps. If the helper is ever missing, recreate it with:
+
+  ```bash
+  git config --local credential.helper \
+    '!f() { . /home/atadmin/vllmtest/.env; echo username=x-access-token; echo "password=$GITHUB_PAT"; }; f'
+  ```
+
+- Never print the token, put it in a remote URL or command history, copy it
+  into tracked files, or stage `.env`.

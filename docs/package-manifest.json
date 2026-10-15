@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T22:20:36Z",
+  "generated_at": "2026-10-15T22:31:11Z",
   "repository": "RTX-PRO-6000-Node",
   "file_count": 16,
   "files": [
@@ -10,8 +10,8 @@
     },
     {
       "path": "AGENTS.md",
-      "size": 2060,
-      "sha256": "d2bcf6da76e53eff30db958d74ee9259ce4c30f9b9eb7cc049e79ef2ee6fcc37"
+      "size": 2877,
+      "sha256": "8eb745d7169372549bcc119db5d8d857f3bd6edb51349a6ebfecfee64891647d"
     },
     {
       "path": "README.md",
