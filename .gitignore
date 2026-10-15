@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+pydev/
+.env
+.env.*
+*.log
+*.swp
+.DS_Store
+
+# Runtime logs and local state should never enter git.
+logs/
+.cache/
+
+# Model weights, caches, and other large local artifacts should never enter git.
+*.safetensors
+*.bin
+*.pt
+*.pth
+huggingface/

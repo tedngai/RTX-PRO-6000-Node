@@ -1,0 +1,87 @@
+{
+  "generated_at": "2026-10-15T22:20:36Z",
+  "repository": "RTX-PRO-6000-Node",
+  "file_count": 16,
+  "files": [
+    {
+      "path": ".gitignore",
+      "size": 285,
+      "sha256": "3293824e8eae4f280d488d90f3ef9aa801b1cd42b7c520497a1d403be4d0f0a5"
+    },
+    {
+      "path": "AGENTS.md",
+      "size": 2060,
+      "sha256": "d2bcf6da76e53eff30db958d74ee9259ce4c30f9b9eb7cc049e79ef2ee6fcc37"
+    },
+    {
+      "path": "README.md",
+      "size": 5690,
+      "sha256": "54f40b4aed2d64bfc485956141e17cc1993a9bb64ecad3eee85c5407d5324b07"
+    },
+    {
+      "path": "configs/docker/README.md",
+      "size": 769,
+      "sha256": "5c00b9abaa3d9205a0dfe2a83bc5313994332d25d1fe6862956c0eaed2933090"
+    },
+    {
+      "path": "configs/docker/candidates/README.md",
+      "size": 414,
+      "sha256": "7d7920125ab87ef768788501209fe49c23eb772e94512f737935566222607927"
+    },
+    {
+      "path": "configs/docker/run_qwen27b_sglang.sh",
+      "size": 4804,
+      "sha256": "2e9f18f6a200fb90a44dd91f932b6aede35bdbca2ab2b63acb6337e994adfebb"
+    },
+    {
+      "path": "configs/docker/setup_docker_gpu.sh",
+      "size": 2425,
+      "sha256": "dc57e134b6199d69f02c91590d93fa261125cdb3c567324f3e4f0e9fe27a7615"
+    },
+    {
+      "path": "docs/INFERENCE_CONTEXT.md",
+      "size": 5136,
+      "sha256": "4b3c67e9612d1c1a9ce24997c0dc2c1d6e490cd1c4344e3d0d954e4ccbe33141"
+    },
+    {
+      "path": "docs/NEXT_EXPERIMENT.md",
+      "size": 1609,
+      "sha256": "e73970b5ffc6ee5785e2c0a977175e0cc2e7d221298c1db35de6dd41b7f1f43b"
+    },
+    {
+      "path": "docs/TESTING.md",
+      "size": 3107,
+      "sha256": "ac9df10d095a13ccb0484e1f50adb4086f555f1dd175e78b3c2a1164b57174b4"
+    },
+    {
+      "path": "docs/results.md",
+      "size": 2153,
+      "sha256": "f302d9abc512955dc3bef6c42872a8014baaca198528c919409d053ec667e2db"
+    },
+    {
+      "path": "evidence/README.md",
+      "size": 589,
+      "sha256": "da72a49ee646767c1b2967fdf9689e67d480460958649a579b071bbd27f6d436"
+    },
+    {
+      "path": "evidence/qwen27b-server-info-20261015T221826Z.json",
+      "size": 35914,
+      "sha256": "8d4795439e69395f0f5e334b287321663cad9fabd4d8a008a608752509ed5832"
+    },
+    {
+      "path": "evidence/qwen27b-smoke-chat-20261015T221828Z.json",
+      "size": 1528,
+      "sha256": "63e5b5a43193a092f42bda06f85e2d9775ea54497be1a891ee30f309ab187237"
+    },
+    {
+      "path": "tests/README.md",
+      "size": 634,
+      "sha256": "24f10e91a39190d87fbd3b3fa40e11ce55f2e72775370b3aee0b0c44743c953e"
+    },
+    {
+      "path": "tests/smoke_test.py",
+      "size": 5010,
+      "sha256": "b6894ca6d7d3e6c37f867b57e9ee64950c1a2bc2f713315a0bd2cadfe4a02473"
+    }
+  ]
+}
