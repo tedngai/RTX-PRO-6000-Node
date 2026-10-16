@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-16T02:26:32Z",
+  "generated_at": "2026-10-16T02:32:39Z",
   "repository": "RTX-PRO-6000-Node",
-  "file_count": 19,
+  "file_count": 20,
   "files": [
     {
       "path": ".gitignore",
@@ -27,6 +27,11 @@
       "path": "configs/docker/candidates/README.md",
       "size": 414,
       "sha256": "7d7920125ab87ef768788501209fe49c23eb772e94512f737935566222607927"
+    },
+    {
+      "path": "configs/docker/candidates/qwen27b-mtp-eagle-314.sh",
+      "size": 5583,
+      "sha256": "cd12aee85679efbe5fb34a57ed8f93ed60929007acbdc7e6a88e3d564b7a6131"
     },
     {
       "path": "configs/docker/run_qwen27b_sglang.sh",
