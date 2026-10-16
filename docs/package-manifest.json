@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-16T02:38:45Z",
+  "generated_at": "2026-10-16T02:48:54Z",
   "repository": "RTX-PRO-6000-Node",
-  "file_count": 22,
+  "file_count": 24,
   "files": [
     {
       "path": ".gitignore",
@@ -15,8 +15,8 @@
     },
     {
       "path": "README.md",
-      "size": 5690,
-      "sha256": "54f40b4aed2d64bfc485956141e17cc1993a9bb64ecad3eee85c5407d5324b07"
+      "size": 6355,
+      "sha256": "1ad88cca2f35e8b5dc77b13a1346483e0f7447a570615ef138249dccb96dec35"
     },
     {
       "path": "configs/docker/README.md",
@@ -27,6 +27,11 @@
       "path": "configs/docker/candidates/README.md",
       "size": 414,
       "sha256": "7d7920125ab87ef768788501209fe49c23eb772e94512f737935566222607927"
+    },
+    {
+      "path": "configs/docker/candidates/qwen27b-dflash-d4-r2.sh",
+      "size": 5589,
+      "sha256": "69ac5940c7f898cbcec86c94b2cbe4514597390ae31b157e1b4352b0ab9c8a51"
     },
     {
       "path": "configs/docker/candidates/qwen27b-dflash-d4.sh",
@@ -40,8 +45,8 @@
     },
     {
       "path": "configs/docker/run_qwen27b_sglang.sh",
-      "size": 5376,
-      "sha256": "0cbd73a11c088301a9da94f7375e0a73da1790a128b1c04fd0106ca343161c7b"
+      "size": 5660,
+      "sha256": "13f3d202dfb1d51932839a34196ac6c9ce91fed83b3afb7a492bed604895a7fd"
     },
     {
       "path": "configs/docker/setup_docker_gpu.sh",
@@ -50,13 +55,13 @@
     },
     {
       "path": "docs/INFERENCE_CONTEXT.md",
-      "size": 5136,
-      "sha256": "4b3c67e9612d1c1a9ce24997c0dc2c1d6e490cd1c4344e3d0d954e4ccbe33141"
+      "size": 5688,
+      "sha256": "2015df28fe8b01113072aa7d596d8ba8d439c10997b718fe7f93089b20e65743"
     },
     {
       "path": "docs/NEXT_EXPERIMENT.md",
-      "size": 2584,
-      "sha256": "a13f3d9408a7b02c7d38d5d33cef92d23ba4a99a0e1a903bc4d2dc49e901dd22"
+      "size": 2988,
+      "sha256": "2ae4939fa194fd64170f52123f60c1b3db9a7fbe80e73a47d184a91588b107d0"
     },
     {
       "path": "docs/TESTING.md",
@@ -65,8 +70,8 @@
     },
     {
       "path": "docs/results.md",
-      "size": 5982,
-      "sha256": "12eb79a3767d1b33181fee466dc28ebc9c3b199f93a6c4cb0ba6c91ff49977da"
+      "size": 8132,
+      "sha256": "5b5d5f516dd05339b45e9f0f353d35ee667e8ab32ffbdd47a2b0721dbfc4788a"
     },
     {
       "path": "evidence/README.md",
@@ -77,6 +82,11 @@
       "path": "evidence/baseline-dflash8-bench-20261016T022322Z.json",
       "size": 129359,
       "sha256": "c0d48c890a0899942c42af932518c538d6f0a7df38b972e4136c6a152515a525"
+    },
+    {
+      "path": "evidence/dflash-d4-bench-20261016T023634Z.json",
+      "size": 129333,
+      "sha256": "5e68c704b48f1415e4059c4e90b0e1dfa4121d4c85493003a32ec37b9ce13df2"
     },
     {
       "path": "evidence/mtp-eagle-314-bench-20261016T023049Z.json",

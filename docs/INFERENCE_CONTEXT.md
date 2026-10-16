@@ -54,19 +54,26 @@ every run, so it survives VM reboots (UUIDs are not hardcoded).
 
 ## Why these flags
 
-- `--kv-cache-dtype fp8_e4m3` — halves KV footprint; recorded capacity
-  181,932 tokens on the 96 GiB slice.
+- `--kv-cache-dtype fp8_e4m3` — halves KV footprint.
 - `--mem-fraction-static 0.85` — static weights + KV reservation; leaves about
-  8 GB free after init.
+  13.9 GB free after init with the current pool sizes.
 - `--attention-backend flashinfer` — prebuilt kernels for sm_120 in this image.
 - `--chunked-prefill-size 2048` — moderate prefill chunks.
-- `--mamba-full-memory-ratio 6.08`, `--mamba-radix-cache-strategy extra_buffer`,
-  `--mamba-ssm-dtype bfloat16` — hybrid linear-attention (GDN) cache sizing and
-  strategy; `extra_buffer` keeps extra state buffers for the radix cache.
+- `--mamba-full-memory-ratio 2.0` (was 6.08 until 2026-10-16),
+  `--mamba-radix-cache-strategy extra_buffer`, `--mamba-ssm-dtype bfloat16` —
+  hybrid linear-attention (GDN) cache sizing and strategy; `extra_buffer`
+  keeps extra state buffers for the radix cache. The ratio splits the cache
+  budget between mamba states and the KV pool (mamba gets ratio/(1+ratio) of
+  it); 6.08 starved the KV pool (182k tokens); 2.0 rebalances to 442,745 KV
+  tokens with 254 mamba states — enough for the 48-request cap (5 slots/req).
 - `--speculative-algorithm DFLASH`, `--speculative-draft-model-path
-  incoai/Qwen3.8-27B-DFlash2`, `--speculative-num-draft-tokens 8` — DFLASH
-  speculative decoding (a v0.5.21 builtin); the token count is the verify
-  window (alias of `--speculative-dflash-block-size`).
+  incoai/Qwen3.8-27B-DFlash2`, `--speculative-num-draft-tokens 4` (was 8
+  until 2026-10-16) — DFLASH speculative decoding (a v0.5.21 builtin); the
+  token count is the verify window (alias of `--speculative-dflash-block-size`).
+  D=8 reserved a 25.9 GB intermediate-SSM pool and capped requests at 45;
+  D=4 halves that pool and lifts the cap to 48 for a small speed cost
+  (A/B in `docs/results.md`; EAGLE/MTP 3/1/4 is the max-capacity alternative,
+  kept in `configs/docker/candidates/`).
 - `--reasoning-parser qwen3`, `--tool-call-parser qwen3_coder` — OpenAI
   reasoning/tool-call parsing.
 

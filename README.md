@@ -8,7 +8,7 @@ chosen and what has actually been measured — not just headline tokens per seco
 
 This repository captures one tested environment. It is a reference for
 experimentation, not a turnkey distribution. The status below reflects the
-latest evidence in the repository, recorded on 2026-10-15; it is not a live
+latest evidence in the repository, recorded on 2026-10-16; it is not a live
 check of a running server.
 
 ## Latest recorded configuration
@@ -23,30 +23,35 @@ The latest validated service snapshot is
 | Runtime | Docker + NVIDIA Container Toolkit; container `qwen27b-sglang`, `--restart no`, manual starts only |
 | GPU selection | MIG device UUID (resolved dynamically; index selection breaks CUDA on this vGPU) |
 | Model | `RadixArk/Qwen3.8-27B-NVFP4-BF16-LMHead` (ModelOpt mixed precision, ~22 GiB) |
-| Speculative decoding | **DFLASH**, draft `incoai/Qwen3.8-27B-DFlash2`, 8 draft tokens |
-| KV cache | `fp8_e4m3`; 181,932 token slots in the recorded startup |
+| Speculative decoding | **DFLASH**, draft `incoai/Qwen3.8-27B-DFlash2`, **4 draft tokens** (was 8; A/B in `docs/results.md`) |
+| KV cache | `fp8_e4m3`; **442,745 token slots** in the latest startup (was 181,932) |
 | Attention backend | `flashinfer` (linear-attention/mamba backend: triton) |
-| Hybrid (mamba) settings | `--mamba-full-memory-ratio 6.08`, `--mamba-radix-cache-strategy extra_buffer`, `--mamba-ssm-dtype bfloat16` |
-| Static memory fraction | `0.85` (≈8.1 GB headroom after init) |
+| Hybrid (mamba) settings | `--mamba-full-memory-ratio **2.0**` (was 6.08), `--mamba-radix-cache-strategy extra_buffer`, `--mamba-ssm-dtype bfloat16` |
+| Static memory fraction | `0.85` (≈13.9 GB headroom after init) |
 | Context | 262,144 tokens |
-| Admission | `max_running_requests` 45 (capped by the mamba state cache) |
+| Admission | `max_running_requests` **48** (mamba states 254; the mamba cache no longer binds) |
 | API | OpenAI-compatible on port 30000 (`--reasoning-parser qwen3`, `--tool-call-parser qwen3_coder`) |
 
 ## What passed on the latest profile
 
-Evidence: [server info snapshot](evidence/qwen27b-server-info-20261015T221826Z.json),
+Evidence: [server info snapshot (2026-10-16 profile)](evidence/dflash-d4-r2-server-info-20261016T024552Z.json),
+[benchmark report](evidence/dflash-d4-r2-bench-20261016T024247Z.json),
+[startup-era server info](evidence/qwen27b-server-info-20261015T221826Z.json),
 [smoke report](evidence/qwen27b-smoke-chat-20261015T221828Z.json).
 
-- **Startup:** server ready in ~118.5 s (weights 10.4 s; CUDA graph capture
-  52.8 s prefill + 16.1 s draft/verify); no post-ready OOM or runtime error was
-  recorded during the scoped checks.
+- **Startup:** server ready in ~150–165 s for every profile tested; no post-ready
+  OOM or runtime error was recorded during the scoped checks.
 - **Interfaces:** `/health` 200, `/v1/models` lists the served model, and a chat
   completion returned `"2 + 2 equals 4."` (`finish_reason=stop`) with reasoning
   separated into `reasoning_content`.
 - **Single-GPU isolation:** GPU 0 ~85.9 GB in use while serving; GPU 1 idle.
 - **DFLASH active:** draft runner initialized (`DFlash2DraftModel`, block size
-  8), selector folded into the draft CUDA graph, verify graph captured for
-  batch sizes up to 45.
+  4 in the current profile), selector folded into the draft CUDA graph.
+- **Concurrency benchmark** (identical seeded prompts across profiles, forced
+  256-token decodes, `tests/benchmark.py`): aggregate throughput saturates at
+  ~1.9–2.2k tok/s around c32–c48; at c45 each user decodes ~59–69 tok/s (p50);
+  16k-token prefill ≈ 1.1 s TTFT at c1; zero retractions and exact output
+  lengths on every request. Full tables in `docs/results.md`.
 
 ## Failures, regressions, and caveats
 
@@ -67,17 +72,20 @@ Evidence: [server info snapshot](evidence/qwen27b-server-info-20261015T221826Z.j
 
 ## Not yet validated
 
-- Throughput and latency under any concurrency (no tokens/s number recorded).
-- DFLASH speedup / acceptance rate (graphs captured, never measured).
-- Long-context behavior (largest recorded request: 65 prompt tokens).
-- Output quality beyond a single arithmetic smoke test.
+- Output quality beyond a single arithmetic smoke test (no retrieval or
+  tool-call correctness evaluation under load).
+- Near-limit context behavior (largest benchmarked prompt ≈ 16k of 262,144
+  tokens).
+- `--mem-fraction-static` 0.90 + CUDA-graph batch trims, and the
+  `extra_buffer_lazy` / `no_buffer` mamba strategies (backlog in
+  `docs/NEXT_EXPERIMENT.md`).
 - Anything multi-GPU (GPU 1 is untouched; TP>1 would need the NCCL fallback).
 
 ## Repository contents
 
 - `configs/docker/` — the current launch configuration and one-time host setup;
   `candidates/` for prepared or historical alternatives.
-- `tests/` — host-side validation scripts (smoke test today; benchmark planned).
+- `tests/` — host-side validation scripts (smoke test + concurrency benchmark).
 - `evidence/` — captured server snapshots and experiment reports.
 - `docs/TESTING.md` — the manual-runs-only operating policy (hard rules).
 - `docs/INFERENCE_CONTEXT.md` — hardware/vGPU/Docker/model/flag background.

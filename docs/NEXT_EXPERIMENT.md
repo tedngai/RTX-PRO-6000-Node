@@ -1,9 +1,10 @@
 # Next experiments
 
-Status: **baseline benchmark done (2026-10-16, see `results.md`)**. The
-approved order is: baseline → speculative-decode A/B → mamba/KV rebalance.
-Nothing runs automatically; every run is a manual start on an idle GPU 0
-(see `docs/TESTING.md`).
+Status: **both approved experiments done (2026-10-16, see `results.md`)**.
+Baseline → spec A/B → mamba/KV rebalance all measured; the winning profile
+(DFLASH D=4 + ratio 2.0, 442,745-token KV pool, cap 48) is the main launch
+config. Backlog below is not scheduled. Nothing runs automatically; every run
+is a manual start on an idle GPU 0 (see `docs/TESTING.md`).
 
 ## Capacity context (measured 2026-10-16, from source + startup log)
 
@@ -24,10 +25,16 @@ the shared KV pool.
    20–30% slower at mid load. See `results.md` for the full table and
    `configs/docker/candidates/qwen27b-dflash-d4.sh`,
    `configs/docker/candidates/qwen27b-mtp-eagle-314.sh`.
-2. **Mamba/KV rebalance — NEXT.** `--mamba-full-memory-ratio` 6.08 → 2.0 on
-   top of DFLASH-4. Expected: KV pool ~308k → ~510k tokens with the request
-   cap holding at 48 (mamba states ~250; 5 slots/req → cap 50 > 48).
-   Candidate file: `configs/docker/candidates/qwen27b-dflash-d4-r2.sh`.
+2. **Mamba/KV rebalance — DONE (2026-10-16).** `--mamba-full-memory-ratio`
+   2.0 on top of DFLASH-4: KV pool 307,769 → **442,745 tokens**, request cap
+   holds at 48 (mamba states 254; 254÷5 = 50 > 48), speed within run-to-run
+   noise of DFLASH-4. Promoted to the main launch script
+   `configs/docker/run_qwen27b_sglang.sh`. Evidence:
+   `evidence/dflash-d4-r2-bench-20261016T024247Z.json`,
+   `evidence/dflash-d4-r2-server-info-20261016T024552Z.json`.
+
+Both approved experiments are complete. The remaining items below are backlog
+and need an explicit go-ahead before they run.
 
 ## Backlog (not scheduled)
 

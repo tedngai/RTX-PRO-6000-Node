@@ -3,6 +3,10 @@
 # GPU 0 is selected by its MIG device UUID (this vGPU runs in MIG mode; selecting by
 # index would expose the parent vGPU and CUDA would fail inside the container).
 # DFLASH speculative decoding, draft model incoai/Qwen3.8-27B-DFlash2.
+# Updated 2026-10-16 after the spec-decode A/B and mamba/KV rebalance
+# experiments (see docs/results.md): --speculative-num-draft-tokens 4 and
+# --mamba-full-memory-ratio 2.0 raise the shared KV pool from 181,925 to
+# 442,745 tokens with the request cap at 48, at a small speed cost.
 #
 # MANUAL USE ONLY. Runs in the foreground; Ctrl+C stops it. There is NO restart
 # policy, no systemd unit, and no auto-restart: if SGLang dies or takes the VM
@@ -120,12 +124,12 @@ docker run \
     --chunked-prefill-size 2048 \
     --reasoning-parser qwen3 \
     --tool-call-parser qwen3_coder \
-    --mamba-full-memory-ratio 6.08 \
+    --mamba-full-memory-ratio 2.0 \
     --host 0.0.0.0 \
     --port 30000 \
     --speculative-algorithm DFLASH \
     --speculative-draft-model-path incoai/Qwen3.8-27B-DFlash2 \
-    --speculative-num-draft-tokens 8 \
+    --speculative-num-draft-tokens 4 \
     --mamba-radix-cache-strategy extra_buffer \
     --mamba-ssm-dtype bfloat16 \
   2>&1 | tee -a "$LOG"

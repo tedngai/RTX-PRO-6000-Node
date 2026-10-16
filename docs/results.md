@@ -115,6 +115,46 @@ Evidence: `evidence/dflash-d4-bench-20261016T023634Z.json`,
 `evidence/mtp-eagle-314-bench-20261016T023049Z.json`,
 `evidence/baseline-dflash8-bench-20261016T022322Z.json`.
 
+## 2026-10-16 — mamba/KV rebalance (`--mamba-full-memory-ratio` 6.08 → 2.0, on top of DFLASH-4)
+
+Candidate: [`configs/docker/candidates/qwen27b-dflash-d4-r2.sh`](../configs/docker/candidates/qwen27b-dflash-d4-r2.sh).
+Startup: mamba states 254 (ssm 17.93 GB + conv 0.70 GB) + speculative
+intermediate 13.78 GB + 0.27 GB; **KV pool 442,745 tokens** (13.51 GiB main +
+4.22 GB DFlash2 draft KV); request cap **48** (254 states ÷ 5 slots = 50 > 48 —
+the mamba cache no longer binds admission).
+Server info: `evidence/dflash-d4-r2-server-info-20261016T024552Z.json`.
+
+| Scenario | baseline (D=8, r=6.08) | dflash-d4-r2 | delta vs baseline |
+| --- | --- | --- | --- |
+| short c1 | 204.7 / 216.6 | 116.9 / 130.9 | −43% (spec D 8→4) |
+| short c8 | 644.6 / 190.3 | 580.8 / 107.7 | −10% |
+| short c16 | 1,475.7 / 144.4 | 982.4 / 97.6 | −33% |
+| short c32 | 2,166.7 / 100.2 | 1,783.9 / 75.5 | −18% |
+| short c45 | 2,012.3 / 69.1 | 1,917.6 / 58.7 | −5% |
+| long c1 | 121.8 / 245.9 | 89.6 / 144.0 | −26% |
+| long c4 | 186.8 / 106.1 | 163.5 / 79.4 | −12% |
+
+(aggregate tok/s / per-req decode p50. A fresh-prompt variance probe
+`python3 tests/benchmark.py --profile dflash-d4-r2-variance --run-seed 1
+--only short` gave c16 1,074.8 / c32 1,727.4 / c45 1,852.9 — short 2–6 s
+scenarios wobble ~±10% run-to-run, so the rebalance costs nothing measurable
+in speed: it is identical to `dflash-d4` at c1/c8/long and within noise
+elsewhere. The probe was not saved as evidence; the command reproduces it.)
+
+**Headline vs the 2026-10-15 baseline config (D=8, r=6.08):**
+
+- Shared KV pool: 181,925 → **442,745 tokens (2.43×)**
+- Concurrent requests: 45 → **48**
+- Per-user context at full load: ~4.0k → **~9.2k tokens each** (442,745 ÷ 48)
+- Aggregate throughput at saturation: ~2.0k → ~1.9k tok/s (−5%)
+- Headroom after init: 8.1 → 13.9 GB
+
+This profile is promoted to
+[`configs/docker/run_qwen27b_sglang.sh`](../configs/docker/run_qwen27b_sglang.sh)
+(the pre-optimization D=8 / r=6.08 config remains in git history and the
+`candidates/` files document each A/B arm).
+Evidence: `evidence/dflash-d4-r2-bench-20261016T024247Z.json`.
+
 ## Caveats recorded during bring-up
 
 - A 16-token request returned empty `content` with only `reasoning_content` —
