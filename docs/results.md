@@ -70,6 +70,51 @@ Observations:
 
 Evidence: `evidence/baseline-dflash8-bench-20261016T022322Z.json`.
 
+## 2026-10-16 — speculative-decode A/B (DFLASH D=8 vs DFLASH D=4 vs EAGLE/MTP 3/1/4)
+
+Same harness, byte-identical prompts (`tests/benchmark.py`); only the
+speculative-decoding flags differ. Capacities from startup logs:
+
+| Profile | Spec config | KV pool (tokens) | Request cap | Intermediate SSM |
+| --- | --- | --- | --- | --- |
+| baseline-dflash8 | DFLASH D=8, DFlash2 draft | 181,925 | 45 | 25.88 GB |
+| dflash-d4 | DFLASH D=4, DFlash2 draft | 307,769 | 48 | 13.78 GB |
+| mtp-eagle-314 | EAGLE/MTP 3/1/4, in-checkpoint head | 376,415 | 48 | 13.78 GB |
+
+Benchmark (aggregate tok/s / per-req decode p50):
+
+| Scenario | DFLASH-8 | DFLASH-4 | MTP 3/1/4 |
+| --- | --- | --- | --- |
+| short c1 | 204.7 / 216.6 | 117.0 / 131.2 | 98.8 / 105.5 |
+| short c8 | 644.6 / 190.3 | 569.8 / 112.7 | 526.0 / 95.6 |
+| short c16 | 1,475.7 / 144.4 | 1,187.0 / 98.3 | 897.8 / 88.3 |
+| short c32 | 2,166.7 / 100.2 | 1,861.9 / 78.6 | 1,430.2 / 70.4 |
+| short c45 | 2,012.3 / 69.1 | 1,900.0 / 60.0 | 1,848.7 / 58.9 |
+| long c1 | 121.8 / 245.9 | 89.9 / 144.6 | 82.7 / 129.2 |
+| long c4 | 186.8 / 106.1 | 152.1 / 73.5 | 150.8 / 71.8 |
+
+Reading:
+
+- DFLASH-4 matches MTP's capacity mechanics (intermediate SSM pool halves,
+  request cap 45 → 48) but is 20–30% faster at mid concurrency: DFlash2
+  drafts all tokens in a single pass, while MTP chains 3 small steps.
+  MTP's extra ~69k pool tokens come from its 1-layer draft KV (0.72 GB vs
+  DFlash2's 2.94 GB).
+- At saturation (c45) the three converge (1.85–2.01k tok/s): compute-bound.
+- Caveat: the synthetic prose inflates D=8 acceptance (5.3–6.3). The server's
+  live average on earlier short-answer traffic was 3.15 — essentially D=4's
+  3.1–3.6. On real text, D=8 wastes drafts 5–8, so its real-world speed edge
+  over D=4 should be far smaller than measured here.
+
+Decision: **DFLASH D=4** is the preferred spec profile for the capacity-first
+goal (+69% KV pool, cap 48, ≤6% aggregate loss at saturation). EAGLE/MTP is
+retained as the max-capacity spec alternative. The mamba/KV rebalance
+(experiment 2) runs on top of DFLASH-4.
+
+Evidence: `evidence/dflash-d4-bench-20261016T023634Z.json`,
+`evidence/mtp-eagle-314-bench-20261016T023049Z.json`,
+`evidence/baseline-dflash8-bench-20261016T022322Z.json`.
+
 ## Caveats recorded during bring-up
 
 - A 16-token request returned empty `content` with only `reasoning_content` —

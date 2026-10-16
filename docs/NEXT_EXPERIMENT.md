@@ -17,20 +17,17 @@ the shared KV pool.
 
 ## Approved next experiments, in order
 
-1. **Speculative-decode A/B** — current DFLASH (D=8, DFlash2 draft) vs
-   **EAGLE/MTP with the in-checkpoint 1-layer MTP head**
-   (`--speculative-algorithm EAGLE --speculative-num-steps 3
-   --speculative-eagle-topk 1 --speculative-num-draft-tokens 4`, no draft
-   download; vendor-recommended recipe). Optional third arm: NGRAM.
-   Expected effect: the intermediate-SSM pool halves (25.9 → ~13 GB), the
-   5-layer draft's ~4-5 GB (weights + KV + graphs) is freed, and the request
-   cap rises; the big KV gain still needs experiment 2.
-   Candidate file: `configs/docker/candidates/qwen27b-mtp-eagle-314.sh`.
-   Compare with `tests/benchmark.py --profile <label>` (identical seeds).
-2. **Mamba/KV rebalance** — `--mamba-full-memory-ratio` 6.08 → ~2 (or pin
-   `--max-mamba-cache-size` explicitly). Expected: KV pool 182k → ~500k
-   tokens; concurrency cap roughly holds (K grows as D shrinks). Run on top
-   of the experiment-1 winner; validate stability under load.
+1. **Speculative-decode A/B — DONE (2026-10-16).** Three arms measured with
+   identical prompts. Winner: **DFLASH with `--speculative-num-draft-tokens 4`**
+   (KV pool 181,925 → 307,769 tokens, cap 45 → 48, ≤6% aggregate loss at
+   saturation). EAGLE/MTP 3/1/4 gives the largest pool (376,415) but is
+   20–30% slower at mid load. See `results.md` for the full table and
+   `configs/docker/candidates/qwen27b-dflash-d4.sh`,
+   `configs/docker/candidates/qwen27b-mtp-eagle-314.sh`.
+2. **Mamba/KV rebalance — NEXT.** `--mamba-full-memory-ratio` 6.08 → 2.0 on
+   top of DFLASH-4. Expected: KV pool ~308k → ~510k tokens with the request
+   cap holding at 48 (mamba states ~250; 5 slots/req → cap 50 > 48).
+   Candidate file: `configs/docker/candidates/qwen27b-dflash-d4-r2.sh`.
 
 ## Backlog (not scheduled)
 
