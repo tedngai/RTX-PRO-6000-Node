@@ -155,6 +155,34 @@ This profile is promoted to
 `candidates/` files document each A/B arm).
 Evidence: `evidence/dflash-d4-r2-bench-20261016T024247Z.json`.
 
+## 2026-10-16 — runtime validation of the promoted config (`--max-running-requests 12`)
+
+The three launch attempts made right after the promotion (03:02–03:22 UTC) all
+failed at CUDA init in the GPU 0 vGPU wedge (`evidence/gpu0-wedge-20261016.md`);
+the guest was rebooted and GPU 0 verified healthy (`mem_get_info` ≈ 97.5 GB
+free on the MIG slice) before this run. Narrative + full table:
+[`evidence/recommended-c12-validation-20261016T040048Z.md`](../evidence/recommended-c12-validation-20261016T040048Z.md).
+
+Startup (promoted config, unmodified): mamba states 254 (17.93 + 0.70 GB,
+unchanged); DFLASH intermediate **3.66 + 0.07 GB** (was 13.78 + 0.27 at the
+engine-derived cap 48 — the explicit cap 12 shrinks the per-request pool);
+**KV pool 708,463 tokens** (+60% vs 442,745); `max_running_requests=12`;
+free mem after init 10.89 GB; `/health` 200; server info before and after the
+benchmark identical.
+
+Benchmark (`--profile recommended-c12`, aggregate / decode-p50 tok/s): up to
+c12 the numbers match the cap-48 run within noise (c1 117.0/130.9, c8
+567.2/104.8, c12 706.5/110.0; long c12 183.5, TTFT p50 7.0 s). Above the cap,
+excess requests queue rather than slow the admitted 12: c16/c32/c45 keep
+~109–115 tok/s decode p50 (vs 98/76/59 at cap 48) while TTFT p50 grows to
+0.37/2.81/3.12 s. 9/9 scenarios green, zero retractions, accept length
+3.12–3.68 of 4 draft tokens.
+
+**The promoted config is now runtime-validated** — the wedge-incident caveat on
+the promotion is resolved. Evidence:
+`evidence/recommended-c12-bench-20261016T040048Z.json`,
+`evidence/recommended-c12-server-info-20261016T035923Z.json` (+ post-bench).
+
 ## Caveats recorded during bring-up
 
 - A 16-token request returned empty `content` with only `reasoning_content` —

@@ -24,23 +24,25 @@ The latest validated service snapshot is
 | GPU selection | MIG device UUID (resolved dynamically; index selection breaks CUDA on this vGPU) |
 | Model | `RadixArk/Qwen3.8-27B-NVFP4-BF16-LMHead` (ModelOpt mixed precision, ~22 GiB) |
 | Speculative decoding | **DFLASH**, draft `incoai/Qwen3.8-27B-DFlash2`, **4 draft tokens** (was 8; A/B in `docs/results.md`) |
-| KV cache | `fp8_e4m3`; **442,745 token slots** in the latest startup (was 181,932) |
+| KV cache | `fp8_e4m3`; **708,463 token slots** in the latest startup (was 181,932; 442,745 at the pre-cap admission of 48) |
 | Attention backend | `flashinfer` (linear-attention/mamba backend: triton) |
 | Hybrid (mamba) settings | `--mamba-full-memory-ratio **2.0**` (was 6.08), `--mamba-radix-cache-strategy extra_buffer`, `--mamba-ssm-dtype bfloat16` |
-| Static memory fraction | `0.85` (≈13.9 GB headroom after init) |
+| Static memory fraction | `0.85` (≈10.9 GB headroom after init) |
 | Context | 262,144 tokens |
-| Admission | `max_running_requests` **48** (mamba states 254; the mamba cache no longer binds) |
+| Admission | `max_running_requests` **12** (user requirement; the engine validated 48). The explicit cap shrinks DFLASH's per-request intermediate pool ~10.3 GB, growing the KV pool 442,745 → 708,463 tokens (~59k/user) |
 | API | OpenAI-compatible on port 30000 (`--reasoning-parser qwen3`, `--tool-call-parser qwen3_coder`) |
 
 ## What passed on the latest profile
 
-Evidence: [server info snapshot (2026-10-16 profile)](evidence/dflash-d4-r2-server-info-20261016T024552Z.json),
-[benchmark report](evidence/dflash-d4-r2-bench-20261016T024247Z.json),
+Evidence: [c12 validation report](evidence/recommended-c12-validation-20261016T040048Z.md),
+[server info snapshot (c12 profile)](evidence/recommended-c12-server-info-20261016T035923Z.json),
+[benchmark report](evidence/recommended-c12-bench-20261016T040048Z.json),
 [startup-era server info](evidence/qwen27b-server-info-20261015T221826Z.json),
 [smoke report](evidence/qwen27b-smoke-chat-20261015T221828Z.json).
 
-- **Startup:** server ready in ~150–165 s for every profile tested; no post-ready
-  OOM or runtime error was recorded during the scoped checks.
+- **Startup:** server ready in ~150–165 s on warm caches (~570 s cold, incl.
+  weight load, every profile tested); no post-ready OOM or runtime error was
+  recorded during the scoped checks.
 - **Interfaces:** `/health` 200, `/v1/models` lists the served model, and a chat
   completion returned `"2 + 2 equals 4."` (`finish_reason=stop`) with reasoning
   separated into `reasoning_content`.
@@ -48,10 +50,12 @@ Evidence: [server info snapshot (2026-10-16 profile)](evidence/dflash-d4-r2-serv
 - **DFLASH active:** draft runner initialized (`DFlash2DraftModel`, block size
   4 in the current profile), selector folded into the draft CUDA graph.
 - **Concurrency benchmark** (identical seeded prompts across profiles, forced
-  256-token decodes, `tests/benchmark.py`): aggregate throughput saturates at
-  ~1.9–2.2k tok/s around c32–c48; at c45 each user decodes ~59–69 tok/s (p50);
-  16k-token prefill ≈ 1.1 s TTFT at c1; zero retractions and exact output
-  lengths on every request. Full tables in `docs/results.md`.
+  256-token decodes, `tests/benchmark.py`): up to the 12-user admission cap the
+  engine holds ~110 tok/s per user (aggregate ~707 tok/s at c12; ~183 tok/s on
+  12 × 16k-token prompts); beyond the cap excess requests queue (c45 TTFT p50
+  ~3.1 s) instead of slowing everyone to ~59–69 tok/s as at the old cap of 48;
+  zero retractions and exact output lengths on every request. Full tables in
+  `docs/results.md`.
 
 ## Failures, regressions, and caveats
 

@@ -1,10 +1,13 @@
 # Next experiments
 
-Status: **both approved experiments done (2026-10-16, see `results.md`)**.
-Baseline → spec A/B → mamba/KV rebalance all measured; the winning profile
-(DFLASH D=4 + ratio 2.0, 442,745-token KV pool, cap 48) is the main launch
-config. Backlog below is not scheduled. Nothing runs automatically; every run
-is a manual start on an idle GPU 0 (see `docs/TESTING.md`).
+Status: **both approved experiments done (2026-10-16, see `results.md`) and the
+main launch config runtime-validated** (DFLASH D=4 + ratio 2.0,
+`--max-running-requests 12`, KV pool 708,463 tokens —
+`evidence/recommended-c12-validation-20261016T040048Z.md`; an intervening
+GPU 0 vGPU wedge requiring a guest reboot is documented in
+`evidence/gpu0-wedge-20261016.md`). Backlog below is not scheduled. Nothing
+runs automatically; every run is a manual start on an idle GPU 0 (see
+`docs/TESTING.md`).
 
 ## Capacity context (measured 2026-10-16, from source + startup log)
 

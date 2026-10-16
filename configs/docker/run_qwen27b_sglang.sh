@@ -8,8 +8,11 @@
 # --mamba-full-memory-ratio 2.0 raise the shared KV pool from 181,925 to
 # 442,745 tokens with the request cap at 48, at a small speed cost.
 # Updated 2026-10-16 (user requirement): --max-running-requests 12 caps
-# admission at 12 concurrent users, giving each ~36k tokens of the shared
-# 442k-token pool; the engine itself validated up to 48 concurrent.
+# admission at 12 concurrent users; the engine itself validated up to 48.
+# Runtime-validated 2026-10-16: the explicit cap also shrinks DFLASH's
+# per-request intermediate pool (~10.3 GB), so the shared KV pool measured
+# 708,463 tokens (~59k per admitted user). Evidence:
+# evidence/recommended-c12-validation-20261016T040048Z.md.
 #
 # MANUAL USE ONLY. Runs in the foreground; Ctrl+C stops it. There is NO restart
 # policy, no systemd unit, and no auto-restart: if SGLang dies or takes the VM
