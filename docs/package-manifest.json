@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-16T02:25:49Z",
+  "generated_at": "2026-10-16T02:26:32Z",
   "repository": "RTX-PRO-6000-Node",
-  "file_count": 18,
+  "file_count": 19,
   "files": [
     {
       "path": ".gitignore",
@@ -62,6 +62,11 @@
       "path": "evidence/README.md",
       "size": 589,
       "sha256": "da72a49ee646767c1b2967fdf9689e67d480460958649a579b071bbd27f6d436"
+    },
+    {
+      "path": "evidence/baseline-dflash8-bench-20261016T022322Z.json",
+      "size": 129359,
+      "sha256": "c0d48c890a0899942c42af932518c538d6f0a7df38b972e4136c6a152515a525"
     },
     {
       "path": "evidence/qwen27b-server-info-20261015T221826Z.json",
