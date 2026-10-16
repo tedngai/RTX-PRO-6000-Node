@@ -1,0 +1,57 @@
+{
+  "captured_at": "2026-10-16T04:31:33Z",
+  "profile": "mamba-nobuffer",
+  "base_url": "http://127.0.0.1:30000",
+  "git": {
+    "commit": "dbfa3b7797b4fffa6ae8a773a5e0e8a1a700dc32",
+    "short": "dbfa3b7"
+  },
+  "prefix_chars": 16000,
+  "cases": [
+    {
+      "ok": true,
+      "error": null,
+      "http_status": 200,
+      "wall_s": 0.897,
+      "prompt_tokens": 2704,
+      "cached_tokens": 0,
+      "completion_tokens": 16,
+      "finish_reason": {
+        "type": "length",
+        "length": 16
+      },
+      "name": "prime"
+    },
+    {
+      "ok": true,
+      "error": null,
+      "http_status": 200,
+      "wall_s": 0.7,
+      "prompt_tokens": 2704,
+      "cached_tokens": 2048,
+      "completion_tokens": 16,
+      "finish_reason": {
+        "type": "length",
+        "length": 16
+      },
+      "name": "reuse"
+    },
+    {
+      "ok": true,
+      "error": null,
+      "http_status": 200,
+      "wall_s": 0.33,
+      "prompt_tokens": 2721,
+      "cached_tokens": 0,
+      "completion_tokens": 16,
+      "finish_reason": {
+        "type": "length",
+        "length": 16
+      },
+      "name": "unrelated"
+    }
+  ],
+  "reuse_ok": true,
+  "reuse_cached_tokens": 2048,
+  "unrelated_cached_tokens": 0
+}

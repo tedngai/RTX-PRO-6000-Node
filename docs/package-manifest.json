@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-16T04:28:29Z",
+  "generated_at": "2026-10-16T04:36:45Z",
   "repository": "RTX-PRO-6000-Node",
-  "file_count": 50,
+  "file_count": 57,
   "files": [
     {
       "path": ".gitignore",
@@ -15,8 +15,8 @@
     },
     {
       "path": "README.md",
-      "size": 6854,
-      "sha256": "1ae273ad0ed7bb4a98a8dbaa726f6ddfeed22d0a142dd27a9cb73daf1f6639ce"
+      "size": 6770,
+      "sha256": "be56fea3e1770e187db7fc541a743bc37f07a71cd3ba1631443f235c3326c8ed"
     },
     {
       "path": "configs/docker/README.md",
@@ -75,8 +75,8 @@
     },
     {
       "path": "docs/NEXT_EXPERIMENT.md",
-      "size": 3764,
-      "sha256": "196462dce563e56bf3de188d1fa61db7855eb0dc780d0a9617558fff030cf1c3"
+      "size": 4097,
+      "sha256": "9d2e26e3ccb736d966b34bf4c473762f3eae4de925b39c96bbd4aada0f7e877f"
     },
     {
       "path": "docs/TESTING.md",
@@ -85,8 +85,8 @@
     },
     {
       "path": "docs/results.md",
-      "size": 12186,
-      "sha256": "80f5d19d4af836d61a9b91c28d7a3f2dc67c333ab801f4bde40a2e18d046d585"
+      "size": 13147,
+      "sha256": "84bd309eefd6e97ed3ec5a10c1815a66882d4c5fe83c553dbabc83b75e286e01"
     },
     {
       "path": "evidence/README.md",
@@ -144,6 +144,16 @@
       "sha256": "092f6a800e8f8fa7a9fe3e6fc7cea706691af291728408b60435aa0e93725638"
     },
     {
+      "path": "evidence/mamba-nobuffer-20261016T043240Z.md",
+      "size": 2895,
+      "sha256": "e71a021f335079dcf44e7a867c0898bb42968c422eab7d3e34ce56b6515adc98"
+    },
+    {
+      "path": "evidence/mamba-nobuffer-bench-20261016T043240Z.json",
+      "size": 147999,
+      "sha256": "f9783987171e8f2c45eabb32bc40727f3aabd76abcfdef9d9cf815db39219d20"
+    },
+    {
       "path": "evidence/mamba-nobuffer-failed-20261016T042741Z.md",
       "size": 922,
       "sha256": "dffb58583aa2ecfa40e46d8dbfaeaf67f71b88c6fe9893652c376d460f7bda1e"
@@ -152,6 +162,26 @@
       "path": "evidence/mamba-nobuffer-failed-20261016T042741Z.txt",
       "size": 2084,
       "sha256": "10d7f29f6317d5f8c349ede2156a0799eef0d7ab48697959a7c4169276525429"
+    },
+    {
+      "path": "evidence/mamba-nobuffer-longprefix-prefix-reuse-20261016T043258Z.json",
+      "size": 1223,
+      "sha256": "1018fef63e7984ab6881cabce27ac857d53edd365774c250da882663bc65a571"
+    },
+    {
+      "path": "evidence/mamba-nobuffer-prefix-reuse-20261016T043135Z.json",
+      "size": 1211,
+      "sha256": "0798b9c5aea97075ea37e48f77b556fd6be40a67e8873dab1acf671cf7defb33"
+    },
+    {
+      "path": "evidence/mamba-nobuffer-server-info-20261016T043129Z.json",
+      "size": 35887,
+      "sha256": "4e56aa8856d5578bfaccf8f9a9f1c0b0cb0634ae1ffabe20fe2c40b9f370552e"
+    },
+    {
+      "path": "evidence/mamba-nobuffer-server-info-post-20261016T043256Z.json",
+      "size": 35944,
+      "sha256": "e1df96331f4b8e8057d0827c6304b9b6e9706598377069da998eba8a2c711a16"
     },
     {
       "path": "evidence/mf90-graphtrim-20261016T042118Z.md",
@@ -207,6 +237,11 @@
       "path": "evidence/recommended-c12-prefix-reuse-20261016T040944Z.json",
       "size": 1215,
       "sha256": "5a949d8eb57c80e0d619aa239f1a42c43333a466ac686085acc843b6f2e9b3ae"
+    },
+    {
+      "path": "evidence/recommended-c12-restored-server-info-20261016T043617Z.json",
+      "size": 35883,
+      "sha256": "8288a720abd5b32620c574a2edb917e9111cfdd6446500bf80015c9b00f80694"
     },
     {
       "path": "evidence/recommended-c12-server-info-20261016T035923Z.json",

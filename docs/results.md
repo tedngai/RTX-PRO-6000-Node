@@ -236,8 +236,23 @@ and the KV pool fell 708,463 → **425,330**. Prefix reuse still cached
 Narrative:
 [`evidence/mamba-lazy-20261016T042627Z.md`](../evidence/mamba-lazy-20261016T042627Z.md).
 
+## 2026-10-16 — mamba strategy `no_buffer` (candidate, not promoted)
+
+First launch died in arg resolution: `no_buffer` asserts overlap
+scheduling off. GPU stayed healthy. Failed excerpt retained
+(`evidence/mamba-nobuffer-failed-20261016T042741Z.md`). One corrected
+launch added `--disable-overlap-schedule` and requested cap 96. The
+engine capped admission to **65** (196 mamba states, 3 slots/request).
+`/server_info` still reports 96. KV pool **427,154** — no gain over
+lazy's 425,330, and 40% below the promoted cap-12 pool. Prefix reuse is
+partial: cached tokens stopped on 2048-token chunk boundaries (2,048 of
+2,704; 6,144 of 8,093), versus 2,688/2,704 on `extra_buffer`. Benchmark
+9/9, zero retractions. Not promoted. The promoted launcher was restored
+afterward (KV pool 708,050, cap 12, `/health` 200). Narrative:
+[`evidence/mamba-nobuffer-20261016T043240Z.md`](../evidence/mamba-nobuffer-20261016T043240Z.md).
+
 ## Not measured yet
 
 - Tool-call correctness under load.
-- Backlog still open: `no_buffer` mamba strategy. See
-  [`NEXT_EXPERIMENT.md`](NEXT_EXPERIMENT.md).
+- Second GPU as an independent replica (policy decision, not a scheduled
+  experiment). See [`NEXT_EXPERIMENT.md`](NEXT_EXPERIMENT.md).

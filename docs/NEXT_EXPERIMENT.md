@@ -1,12 +1,12 @@
 # Next experiments
 
-Status: **both approved experiments done (2026-10-16, see `results.md`) and the
-main launch config runtime-validated** (DFLASH D=4 + ratio 2.0,
-`--max-running-requests 12`, KV pool 708,463 tokens —
-`evidence/recommended-c12-validation-20261016T040048Z.md`; an intervening
-GPU 0 vGPU wedge requiring a guest reboot is documented in
-`evidence/gpu0-wedge-20261016.md`). Backlog below is not scheduled. Nothing
-runs automatically; every run is a manual start on an idle GPU 0 (see
+Status: **approved experiments and the 2026-10-16 backlog are measured**
+(see `results.md`). The live config remains the promoted launcher
+(DFLASH D=4 + ratio 2.0, `--max-running-requests 12`, KV pool ~708k —
+`evidence/recommended-c12-validation-20261016T040048Z.md`). None of the
+backlog candidates were promoted. An intervening GPU 0 vGPU wedge is
+documented in `evidence/gpu0-wedge-20261016.md`. Nothing runs
+automatically; every run is a manual start on an idle GPU 0 (see
 `docs/TESTING.md`).
 
 ## Capacity context (measured 2026-10-16, from source + startup log)
@@ -36,8 +36,9 @@ the shared KV pool.
    `evidence/dflash-d4-r2-bench-20261016T024247Z.json`,
    `evidence/dflash-d4-r2-server-info-20261016T024552Z.json`.
 
-Both approved experiments are complete. The remaining items below are backlog
-and need an explicit go-ahead before they run.
+Both approved experiments are complete. The backlog below was run on
+2026-10-16 and left unpromoted, except the second GPU, which is still a
+policy decision.
 
 ## Backlog (not scheduled)
 
@@ -50,7 +51,11 @@ and need an explicit go-ahead before they run.
   `/server_info` still shows 80), prefix reuse intact (2,688/2,704), KV
   pool 425,330 because the DFLASH intermediate pool grew to 16.31 GB.
   `evidence/mamba-lazy-20261016T042627Z.md`.
-- `no_buffer` (3 slots/req) — not yet measured.
+- `no_buffer` (3 slots/req) — **measured 2026-10-16, not promoted**.
+  Requires `--disable-overlap-schedule` (first launch failed arg
+  validation; GPU stayed up). Effective cap 65 (requested 96), KV pool
+  427,154, prefix reuse only up to 2048-token chunk boundaries
+  (2,048/2,704 and 6,144/8,093). `evidence/mamba-nobuffer-20261016T043240Z.md`.
 - Long-context retrieval quality — **DONE (2026-10-16)** on the promoted
   c12 server, no relaunch. Exact quote of a planted function at 4k and at
   238k tokens (91% of the 262,144 context), needle at 0.10 / 0.50 / 0.90.
