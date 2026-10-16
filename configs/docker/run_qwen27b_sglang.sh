@@ -16,6 +16,15 @@
 # Follow logs:       tail -f logs/qwen27b_sglang.log
 # After a crash:     docker logs --tail 200 qwen27b-sglang
 # Remove leftover:   docker rm qwen27b-sglang
+#
+# NOTE (lifetime, 2026-10-15): this script runs `docker run` ATTACHED, so docker's
+# signal proxy ties the container to the shell that launched it. Closing or
+# killing that shell forwards SIGTERM to SGLang, which shuts down cleanly
+# (exit 0) — and with `--restart no` nothing brings it back. When launching from
+# a shell that will not stay alive (e.g. an agent session), detach it:
+#   sg docker -c 'setsid nohup bash configs/docker/run_qwen27b_sglang.sh \
+#       >> logs/launch_qwen27b.out 2>&1 < /dev/null &'
+# Stopping is unchanged: docker stop qwen27b-sglang.
 
 set -u
 cd /home/atadmin/vllmtest || exit 1

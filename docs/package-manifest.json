@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T22:31:11Z",
+  "generated_at": "2026-10-16T00:50:25Z",
   "repository": "RTX-PRO-6000-Node",
   "file_count": 16,
   "files": [
@@ -30,8 +30,8 @@
     },
     {
       "path": "configs/docker/run_qwen27b_sglang.sh",
-      "size": 4804,
-      "sha256": "2e9f18f6a200fb90a44dd91f932b6aede35bdbca2ab2b63acb6337e994adfebb"
+      "size": 5376,
+      "sha256": "0cbd73a11c088301a9da94f7375e0a73da1790a128b1c04fd0106ca343161c7b"
     },
     {
       "path": "configs/docker/setup_docker_gpu.sh",
@@ -50,8 +50,8 @@
     },
     {
       "path": "docs/TESTING.md",
-      "size": 3107,
-      "sha256": "ac9df10d095a13ccb0484e1f50adb4086f555f1dd175e78b3c2a1164b57174b4"
+      "size": 3699,
+      "sha256": "5bbacb71b674cf46c7539abcb82a6bed99392d9dfbd85d5d05df40f31b2e0166"
     },
     {
       "path": "docs/results.md",

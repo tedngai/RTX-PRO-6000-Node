@@ -50,6 +50,20 @@ curl -s localhost:30000/health           # wait for HTTP 200 before sending requ
 python3 tests/smoke_test.py              # optional end-to-end check
 ```
 
+The script runs `docker run` **attached**: the container lives exactly as long as
+the shell that started it. Closing or killing that shell forwards SIGTERM and the
+server shuts down cleanly (exit 0, no crash) — with `--restart no` nothing brings
+it back. When launching from a shell that will not stay alive (agent session,
+scripted setup), detach instead:
+
+```bash
+sg docker -c 'setsid nohup bash configs/docker/run_qwen27b_sglang.sh \
+    >> logs/launch_qwen27b.out 2>&1 < /dev/null &'
+```
+
+This is still a manual start with no restart policy; stop it with
+`docker stop qwen27b-sglang`.
+
 ## After a crash
 
 Nothing restarts by itself. Check `nvidia-smi`, make sure no server remains
