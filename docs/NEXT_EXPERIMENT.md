@@ -45,9 +45,12 @@ and need an explicit go-ahead before they run.
   **measured 2026-10-16, not promoted**. KV pool +10% (708,463 → 779,104),
   headroom after init 10.89 → 6.95 GB, benchmark 9/9 with no OOM. Short of
   the ~12–15% estimate. `evidence/mf90-graphtrim-20261016T042118Z.md`.
-- `--mamba-radix-cache-strategy extra_buffer_lazy` (4 slots/req) or
-  `no_buffer` (3 slots/req) — raises the request cap; verify prefix-reuse
-  behavior.
+- `--mamba-radix-cache-strategy extra_buffer_lazy` (4 slots/req) —
+  **measured 2026-10-16, not promoted**. Effective cap 57 (requested 80;
+  `/server_info` still shows 80), prefix reuse intact (2,688/2,704), KV
+  pool 425,330 because the DFLASH intermediate pool grew to 16.31 GB.
+  `evidence/mamba-lazy-20261016T042627Z.md`.
+- `no_buffer` (3 slots/req) — not yet measured.
 - Long-context retrieval quality — **DONE (2026-10-16)** on the promoted
   c12 server, no relaunch. Exact quote of a planted function at 4k and at
   238k tokens (91% of the 262,144 context), needle at 0.10 / 0.50 / 0.90.

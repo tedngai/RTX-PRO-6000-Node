@@ -222,8 +222,22 @@ Speed at c8+ matches the c12 run within noise. Not promoted: the KV gain
 is modest and headroom is 4 GB tighter. Narrative:
 [`evidence/mf90-graphtrim-20261016T042118Z.md`](../evidence/mf90-graphtrim-20261016T042118Z.md).
 
+## 2026-10-16 — mamba strategy `extra_buffer_lazy` (candidate, not promoted)
+
+One launch of
+[`configs/docker/candidates/qwen27b-mamba-lazy.sh`](../configs/docker/candidates/qwen27b-mamba-lazy.sh)
+with `--max-running-requests 80` so DFLASH's default of 48 would not hide
+the slot change. The engine capped admission to **57** (229 mamba states,
+4 slots/request). `/server_info` still reports the requested 80; the
+startup line is the effective cap. DFLASH intermediate grew to 16.31 GB
+and the KV pool fell 708,463 → **425,330**. Prefix reuse still cached
+2,688/2,704 tokens. Benchmark 9/9, zero retractions; c45 ran concurrently
+(aggregate 1,942 tok/s, decode p50 65) instead of queueing. Not promoted.
+Narrative:
+[`evidence/mamba-lazy-20261016T042627Z.md`](../evidence/mamba-lazy-20261016T042627Z.md).
+
 ## Not measured yet
 
 - Tool-call correctness under load.
-- Backlog still open: `extra_buffer_lazy` / `no_buffer` mamba strategies.
-  See [`NEXT_EXPERIMENT.md`](NEXT_EXPERIMENT.md).
+- Backlog still open: `no_buffer` mamba strategy. See
+  [`NEXT_EXPERIMENT.md`](NEXT_EXPERIMENT.md).

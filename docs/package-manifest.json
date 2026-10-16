@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-16T04:22:00Z",
+  "generated_at": "2026-10-16T04:26:57Z",
   "repository": "RTX-PRO-6000-Node",
-  "file_count": 43,
+  "file_count": 48,
   "files": [
     {
       "path": ".gitignore",
@@ -75,8 +75,8 @@
     },
     {
       "path": "docs/NEXT_EXPERIMENT.md",
-      "size": 3541,
-      "sha256": "6fcacfd0c3a058bdf918fb3be4894a44c34bb7bba321193d3652cf56e2d13bf5"
+      "size": 3764,
+      "sha256": "196462dce563e56bf3de188d1fa61db7855eb0dc780d0a9617558fff030cf1c3"
     },
     {
       "path": "docs/TESTING.md",
@@ -85,8 +85,8 @@
     },
     {
       "path": "docs/results.md",
-      "size": 11402,
-      "sha256": "e16bb22f261dcf1832f14f2c1faadf7ac9a4110c5f5ae8f3890a73582880bb13"
+      "size": 12186,
+      "sha256": "80f5d19d4af836d61a9b91c28d7a3f2dc67c333ab801f4bde40a2e18d046d585"
     },
     {
       "path": "evidence/README.md",
@@ -117,6 +117,31 @@
       "path": "evidence/gpu0-wedge-20261016.md",
       "size": 2622,
       "sha256": "eae3dee24ece3ea4a329f9c2ef53e0c354b17d4328bb8f30bc27f9f5c20c775b"
+    },
+    {
+      "path": "evidence/mamba-lazy-20261016T042627Z.md",
+      "size": 2522,
+      "sha256": "460477e4693bdc99f5dcd29ec1e60aa54e46d457a899ccbb5cafcc9aeb7c60f9"
+    },
+    {
+      "path": "evidence/mamba-lazy-bench-20261016T042627Z.json",
+      "size": 148053,
+      "sha256": "f43b46c7d220bf545a1b48648dccec1083ba9eb6e61f856c191c2f07fe55b349"
+    },
+    {
+      "path": "evidence/mamba-lazy-prefix-reuse-20261016T042522Z.json",
+      "size": 1209,
+      "sha256": "5580b46bf70e2b2e6868ec60763489f106ded81ae4fe9c2bf541aa6c6fd2b7eb"
+    },
+    {
+      "path": "evidence/mamba-lazy-server-info-20261016T042513Z.json",
+      "size": 35901,
+      "sha256": "b2e3e37f48e8bd8e6776fb1908d7d4656b8bc4856232db221aacd97cfef70dbd"
+    },
+    {
+      "path": "evidence/mamba-lazy-server-info-post-20261016T042648Z.json",
+      "size": 35959,
+      "sha256": "092f6a800e8f8fa7a9fe3e6fc7cea706691af291728408b60435aa0e93725638"
     },
     {
       "path": "evidence/mf90-graphtrim-20261016T042118Z.md",
