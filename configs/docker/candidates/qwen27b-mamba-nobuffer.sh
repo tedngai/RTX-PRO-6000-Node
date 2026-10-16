@@ -5,12 +5,16 @@
 # CANDIDATE (not the promoted config): mamba radix strategy no_buffer.
 # Same as configs/docker/run_qwen27b_sglang.sh except
 # --mamba-radix-cache-strategy extra_buffer -> no_buffer (3 state
-# slots/request instead of 5) and --max-running-requests 96, set above the
-# expected mamba cap (~84 at 254 states) so the engine's mamba cap is what
-# binds. DFLASH otherwise forces 48 when the flag is omitted, which would
-# hide the raise. Production admission stays 12; this candidate only
-# measures the higher cap and whether prefix reuse still works.
-# Do not promote without evidence. One manual run; no retry if it OOMs.
+# slots/request instead of 5), --disable-overlap-schedule (required:
+# SGLang asserts no_buffer does not support the overlap scheduler), and
+# --max-running-requests 96, set above the expected mamba cap so the
+# engine's mamba cap is what binds. DFLASH otherwise forces 48 when the
+# flag is omitted, which would hide the raise. Production admission stays
+# 12; this candidate only measures the higher cap and whether prefix
+# reuse still works.
+# The first launch (2026-10-16 04:27 UTC) died in arg validation before
+# CUDA work because overlap was still on. That failed probe is retained.
+# Do not promote without evidence. No retry if this launch OOMs.
 #
 # MANUAL USE ONLY. Runs in the foreground; Ctrl+C stops it. There is NO restart
 # policy, no systemd unit, and no auto-restart: if SGLang dies or takes the VM
@@ -136,5 +140,6 @@ docker run \
     --speculative-draft-model-path incoai/Qwen3.8-27B-DFlash2 \
     --speculative-num-draft-tokens 4 \
     --mamba-radix-cache-strategy no_buffer \
+    --disable-overlap-schedule \
     --mamba-ssm-dtype bfloat16 \
   2>&1 | tee -a "$LOG"

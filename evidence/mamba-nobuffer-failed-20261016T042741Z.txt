@@ -1,0 +1,29 @@
+[2026-10-16 04:27:41] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[2026-10-16 04:27:41] Failed to get GPU memory capacity from nvidia-smi. Falling back to torch.cuda.mem_get_info(). Reported total GPU memory per device (MiB): [97838], using min: 97838 MiB.
+[2026-10-16 04:27:41] kill_process_tree called: parent_pid=1, include_parent=False, pid=1
+Traceback (most recent call last):
+  File "/opt/sglang/bin/sglang", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/cli/main.py", line 51, in main
+    serve(args, extra_argv)
+  File "/sgl-workspace/sglang/python/sglang/cli/serve.py", line 213, in serve
+    registered.backend.run(request)
+  File "/sgl-workspace/sglang/python/sglang/cli/serve.py", line 100, in _run_llm
+    run_server(server_args)
+  File "/sgl-workspace/sglang/python/sglang/launch_server.py", line 29, in run_server
+    server_args.resolve_once()
+  File "/sgl-workspace/sglang/python/sglang/srt/server_args.py", line 246, in resolve_once
+    run_resolution_pipeline(self)
+  File "/sgl-workspace/sglang/python/sglang/srt/arg_groups/pipeline.py", line 212, in run_resolution_pipeline
+    run_hook(handle_model_specific_adjustments, server_args)
+  File "/sgl-workspace/sglang/python/sglang/srt/arg_groups/resolution_hooks.py", line 134, in run_hook
+    step(server_args)
+  File "/sgl-workspace/sglang/python/sglang/srt/arg_groups/model_hook.py", line 692, in handle_model_specific_adjustments
+    handle_mamba_radix_cache(server_args, hf_config)
+  File "/sgl-workspace/sglang/python/sglang/srt/arg_groups/model_hook.py", line 964, in handle_mamba_radix_cache
+    validate_mamba_no_buffer(view, hf_config.architectures[0])
+  File "/sgl-workspace/sglang/python/sglang/srt/arg_groups/mamba_hook.py", line 148, in validate_mamba_no_buffer
+    assert view.disable_overlap_schedule, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: no_buffer do not support overlap schedule. Try to set disable_overlap_schedule=True.

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-16T04:26:57Z",
+  "generated_at": "2026-10-16T04:28:29Z",
   "repository": "RTX-PRO-6000-Node",
-  "file_count": 48,
+  "file_count": 50,
   "files": [
     {
       "path": ".gitignore",
@@ -45,8 +45,8 @@
     },
     {
       "path": "configs/docker/candidates/qwen27b-mamba-nobuffer.sh",
-      "size": 5968,
-      "sha256": "848c55b0ea3a1c5a0e0167376a5dcea5d9836a4f6602f24d2228d306fa952c6b"
+      "size": 6228,
+      "sha256": "a2ac3d57a7aeedb3724739e38f0684f2044b17708afbae00a6e14f96e0368ce2"
     },
     {
       "path": "configs/docker/candidates/qwen27b-mf90-graphtrim.sh",
@@ -142,6 +142,16 @@
       "path": "evidence/mamba-lazy-server-info-post-20261016T042648Z.json",
       "size": 35959,
       "sha256": "092f6a800e8f8fa7a9fe3e6fc7cea706691af291728408b60435aa0e93725638"
+    },
+    {
+      "path": "evidence/mamba-nobuffer-failed-20261016T042741Z.md",
+      "size": 922,
+      "sha256": "dffb58583aa2ecfa40e46d8dbfaeaf67f71b88c6fe9893652c376d460f7bda1e"
+    },
+    {
+      "path": "evidence/mamba-nobuffer-failed-20261016T042741Z.txt",
+      "size": 2084,
+      "sha256": "10d7f29f6317d5f8c349ede2156a0799eef0d7ab48697959a7c4169276525429"
     },
     {
       "path": "evidence/mf90-graphtrim-20261016T042118Z.md",
