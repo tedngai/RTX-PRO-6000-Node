@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-16T02:22:34Z",
+  "generated_at": "2026-10-16T02:25:49Z",
   "repository": "RTX-PRO-6000-Node",
-  "file_count": 16,
+  "file_count": 18,
   "files": [
     {
       "path": ".gitignore",
@@ -45,8 +45,8 @@
     },
     {
       "path": "docs/NEXT_EXPERIMENT.md",
-      "size": 1609,
-      "sha256": "e73970b5ffc6ee5785e2c0a977175e0cc2e7d221298c1db35de6dd41b7f1f43b"
+      "size": 2770,
+      "sha256": "587a911ceb3ba669fe05af3f52a2234bbb8f96e9436939b4d09ed6fc789f82f2"
     },
     {
       "path": "docs/TESTING.md",
@@ -55,8 +55,8 @@
     },
     {
       "path": "docs/results.md",
-      "size": 2153,
-      "sha256": "f302d9abc512955dc3bef6c42872a8014baaca198528c919409d053ec667e2db"
+      "size": 3729,
+      "sha256": "59d9ce153ca429f671b140ae3b7663fa0b565c697851a7d55500a345bcdded11"
     },
     {
       "path": "evidence/README.md",
@@ -77,6 +77,16 @@
       "path": "tests/README.md",
       "size": 634,
       "sha256": "24f10e91a39190d87fbd3b3fa40e11ce55f2e72775370b3aee0b0c44743c953e"
+    },
+    {
+      "path": "tests/benchmark.py",
+      "size": 16769,
+      "sha256": "8e58087a7acc377d8e8e792a48f66ef1f2f90147ac7739f2a4c4a465a3184db5"
+    },
+    {
+      "path": "tests/gen_manifest.py",
+      "size": 2714,
+      "sha256": "2068ee0f0b1dc6ffb0b79e6eeded7c88d7e5e2052491d1430166c9712b8b5cc3"
     },
     {
       "path": "tests/smoke_test.py",
