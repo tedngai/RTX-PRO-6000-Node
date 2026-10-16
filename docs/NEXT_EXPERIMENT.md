@@ -46,8 +46,11 @@ and need an explicit go-ahead before they run.
 - `--mamba-radix-cache-strategy extra_buffer_lazy` (4 slots/req) or
   `no_buffer` (3 slots/req) — raises the request cap; verify prefix-reuse
   behavior.
-- Long-context retrieval quality (near-limit chat prompt, test code in the
-  middle).
+- Long-context retrieval quality — **DONE (2026-10-16)** on the promoted
+  c12 server, no relaunch. Exact quote of a planted function at 4k and at
+  238k tokens (91% of the 262,144 context), needle at 0.10 / 0.50 / 0.90.
+  Prefix reuse on `extra_buffer` cached 2,688/2,704 tokens.
+  `evidence/recommended-c12-longctx-20261016T041501Z.md`.
 - Second GPU (GPU 1) as an independent replica — policy decision, 2× capacity.
 
 ## Rules for running them

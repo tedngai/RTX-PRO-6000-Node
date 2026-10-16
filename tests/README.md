@@ -6,6 +6,13 @@ reports under `evidence/`; they never start or stop anything.
 - `smoke_test.py` — checks `/health`, picks the served model from `/v1/models`,
   sends one deterministic chat completion, and optionally saves an evidence
   report. Python standard library only.
+- `benchmark.py` — concurrency benchmark (TTFT, decode speed, aggregate
+  throughput, spec acceptance). Never starts or stops the server.
+- `long_context_retrieval.py` — needle-in-a-haystack at a near-limit chat
+  prompt. Does not store the haystack in the evidence file.
+- `prefix_reuse_probe.py` — checks radix/mamba prefix-cache hits on a shared
+  prefix versus an unrelated one.
+- `gen_manifest.py` — regenerates `docs/package-manifest.json`.
 
 ```bash
 python3 -m py_compile tests/*.py

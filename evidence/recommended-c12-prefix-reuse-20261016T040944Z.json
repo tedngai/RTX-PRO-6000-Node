@@ -1,0 +1,57 @@
+{
+  "captured_at": "2026-10-16T04:09:43Z",
+  "profile": "recommended-c12",
+  "base_url": "http://127.0.0.1:30000",
+  "git": {
+    "commit": "7cad276a46e34d6fab2049e425e7d5ff6a601ce9",
+    "short": "7cad276"
+  },
+  "prefix_chars": 16000,
+  "cases": [
+    {
+      "ok": true,
+      "error": null,
+      "http_status": 200,
+      "wall_s": 0.413,
+      "prompt_tokens": 2704,
+      "cached_tokens": 0,
+      "completion_tokens": 16,
+      "finish_reason": {
+        "type": "length",
+        "length": 16
+      },
+      "name": "prime"
+    },
+    {
+      "ok": true,
+      "error": null,
+      "http_status": 200,
+      "wall_s": 0.245,
+      "prompt_tokens": 2704,
+      "cached_tokens": 2688,
+      "completion_tokens": 16,
+      "finish_reason": {
+        "type": "length",
+        "length": 16
+      },
+      "name": "reuse"
+    },
+    {
+      "ok": true,
+      "error": null,
+      "http_status": 200,
+      "wall_s": 0.374,
+      "prompt_tokens": 2721,
+      "cached_tokens": 0,
+      "completion_tokens": 16,
+      "finish_reason": {
+        "type": "length",
+        "length": 16
+      },
+      "name": "unrelated"
+    }
+  ],
+  "reuse_ok": true,
+  "reuse_cached_tokens": 2688,
+  "unrelated_cached_tokens": 0
+}

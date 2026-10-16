@@ -190,8 +190,29 @@ the promotion is resolved. Evidence:
 - `/health` returned 503 for a moment immediately after "Application startup
   complete", then 200 on the next check.
 
+## 2026-10-16 — long-context retrieval + prefix reuse (promoted c12 config, no relaunch)
+
+Needle-in-a-haystack on the chat API, thinking disabled, canary
+`orbit-slate-4192` planted only inside one function. All four probes
+quoted the function exactly (`finish_reason=stop`):
+
+| Probe | prompt tokens | needle depth | elapsed |
+| --- | --- | --- | --- |
+| control, mid | 4,131 | 0.50 | 0.76 s |
+| near-limit, mid | 238,453 | 0.50 | 91.1 s |
+| near-limit, early | 238,304 | 0.10 | 91.3 s |
+| near-limit, late | 238,338 | 0.90 | 91.1 s |
+
+238k is 91% of the 262,144 context. Narrative:
+[`evidence/recommended-c12-longctx-20261016T041501Z.md`](../evidence/recommended-c12-longctx-20261016T041501Z.md).
+
+Prefix reuse on the same server (`extra_buffer`): a second request sharing
+a 2,704-token prefix cached **2,688** tokens; an unrelated prefix cached 0.
+Evidence: `evidence/recommended-c12-prefix-reuse-20261016T040944Z.json`.
+
 ## Not measured yet
 
-- Output quality (retrieval/tool-call correctness under load).
-- See [`NEXT_EXPERIMENT.md`](NEXT_EXPERIMENT.md) for the remaining plan
-  (speculative-decode A/B, mamba/KV rebalance).
+- Tool-call correctness under load.
+- Backlog still open: `--mem-fraction-static` 0.90 + CUDA-graph trims, and
+  the `extra_buffer_lazy` / `no_buffer` mamba strategies. See
+  [`NEXT_EXPERIMENT.md`](NEXT_EXPERIMENT.md).

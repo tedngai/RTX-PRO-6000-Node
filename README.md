@@ -76,10 +76,10 @@ Evidence: [c12 validation report](evidence/recommended-c12-validation-20261016T0
 
 ## Not yet validated
 
-- Output quality beyond a single arithmetic smoke test (no retrieval or
-  tool-call correctness evaluation under load).
-- Near-limit context behavior (largest benchmarked prompt ≈ 16k of 262,144
-  tokens).
+- Tool-call correctness under load (retrieval at 238k tokens, 91% of
+  context, did quote a planted function exactly — see
+  `evidence/recommended-c12-longctx-20261016T041501Z.md` — but that is one
+  needle, not a tool-call eval).
 - `--mem-fraction-static` 0.90 + CUDA-graph batch trims, and the
   `extra_buffer_lazy` / `no_buffer` mamba strategies (backlog in
   `docs/NEXT_EXPERIMENT.md`).

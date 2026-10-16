@@ -1,0 +1,118 @@
+{
+  "captured_at": "2026-10-16T04:10:21Z",
+  "profile": "recommended-c12",
+  "base_url": "http://127.0.0.1:30000",
+  "git": {
+    "commit": "7cad276a46e34d6fab2049e425e7d5ff6a601ce9",
+    "short": "7cad276"
+  },
+  "model": "RadixArk/Qwen3.8-27B-NVFP4-BF16-LMHead",
+  "canary": "orbit-slate-4192",
+  "needle": "def needle_fn():\n    \"\"\"retrieval-canary orbit-slate-4192\"\"\"\n    return {\"canary\": \"orbit-slate-4192\", \"checksum\": 4192}\n",
+  "thinking_disabled": true,
+  "target_tokens": 240000,
+  "chars_per_token": 5.895,
+  "probes": [
+    {
+      "name": "control-4k-mid",
+      "target_tokens": 4096,
+      "depth_requested": 0.5,
+      "depth_char_fraction": 0.493,
+      "needle_char_index": 11922,
+      "user_chars": 24171,
+      "tokenize_count": 4120,
+      "http_status": 200,
+      "error": null,
+      "client_elapsed_s": 0.759,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 4131,
+        "total_tokens": 4184,
+        "completion_tokens": 53,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "content": "```python\ndef needle_fn():\n    \"\"\"retrieval-canary orbit-slate-4192\"\"\"\n    return {\"canary\": \"orbit-slate-4192\", \"checksum\": 4192}\n```",
+      "canary_hit": true,
+      "function_hit": true,
+      "checksum_hit": true,
+      "pass": true
+    },
+    {
+      "name": "near-mid",
+      "target_tokens": 240000,
+      "depth_requested": 0.5,
+      "depth_char_fraction": 0.5,
+      "needle_char_index": 707262,
+      "user_chars": 1414847,
+      "tokenize_count": 238442,
+      "http_status": 200,
+      "error": null,
+      "client_elapsed_s": 91.144,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 238453,
+        "total_tokens": 238501,
+        "completion_tokens": 48,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "content": "def needle_fn():\n    \"\"\"retrieval-canary orbit-slate-4192\"\"\"\n    return {\"canary\": \"orbit-slate-4192\", \"checksum\": 4192}",
+      "canary_hit": true,
+      "function_hit": true,
+      "checksum_hit": true,
+      "pass": true
+    },
+    {
+      "name": "near-early",
+      "target_tokens": 240000,
+      "depth_requested": 0.1,
+      "depth_char_fraction": 0.1,
+      "needle_char_index": 141437,
+      "user_chars": 1414802,
+      "tokenize_count": 238293,
+      "http_status": 200,
+      "error": null,
+      "client_elapsed_s": 91.257,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 238304,
+        "total_tokens": 238352,
+        "completion_tokens": 48,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "content": "def needle_fn():\n    \"\"\"retrieval-canary orbit-slate-4192\"\"\"\n    return {\"canary\": \"orbit-slate-4192\", \"checksum\": 4192}",
+      "canary_hit": true,
+      "function_hit": true,
+      "checksum_hit": true,
+      "pass": true
+    },
+    {
+      "name": "near-late",
+      "target_tokens": 240000,
+      "depth_requested": 0.9,
+      "depth_char_fraction": 0.9,
+      "needle_char_index": 1272999,
+      "user_chars": 1414799,
+      "tokenize_count": 238327,
+      "http_status": 200,
+      "error": null,
+      "client_elapsed_s": 91.116,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 238338,
+        "total_tokens": 238386,
+        "completion_tokens": 48,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "content": "def needle_fn():\n    \"\"\"retrieval-canary orbit-slate-4192\"\"\"\n    return {\"canary\": \"orbit-slate-4192\", \"checksum\": 4192}",
+      "canary_hit": true,
+      "function_hit": true,
+      "checksum_hit": true,
+      "pass": true
+    }
+  ],
+  "all_pass": true
+}

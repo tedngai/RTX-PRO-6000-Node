@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-16T04:01:24Z",
+  "generated_at": "2026-10-16T04:16:02Z",
   "repository": "RTX-PRO-6000-Node",
-  "file_count": 27,
+  "file_count": 36,
   "files": [
     {
       "path": ".gitignore",
@@ -15,8 +15,8 @@
     },
     {
       "path": "README.md",
-      "size": 6765,
-      "sha256": "e6d17ec2ad330b82ea6f2b397471c027af4987e4edc22c69a7c71de08eb10c95"
+      "size": 6792,
+      "sha256": "7aad3bd1fc2c2690a621a1ece8c26ca69f6a4ca58bc1645bf8f42dbc331f9cf0"
     },
     {
       "path": "configs/docker/README.md",
@@ -60,8 +60,8 @@
     },
     {
       "path": "docs/NEXT_EXPERIMENT.md",
-      "size": 3120,
-      "sha256": "343123f1e853847a8733a1e5124f6f4aaecd7609ad44948a4585ac9c4dfb6fa5"
+      "size": 3375,
+      "sha256": "693b34adf013dcd5237041be5411691820c757cbda765d5c2123fac33cf78533"
     },
     {
       "path": "docs/TESTING.md",
@@ -70,8 +70,8 @@
     },
     {
       "path": "docs/results.md",
-      "size": 9779,
-      "sha256": "e4797975b67a50368744dab8b3072c6eaaec7b2f31d45e3f06c5bc0e119b95fd"
+      "size": 10741,
+      "sha256": "109f216410d215a0dbb900487fd62b86a567d75cccdd5cb2b10e4257a106c399"
     },
     {
       "path": "evidence/README.md",
@@ -119,9 +119,44 @@
       "sha256": "63e5b5a43193a092f42bda06f85e2d9775ea54497be1a891ee30f309ab187237"
     },
     {
+      "path": "evidence/recommended-c12-bench-20261016T040048Z.json",
+      "size": 148115,
+      "sha256": "f1d59771edeca0cdaa098344556a4c23691b4adb7cefdc868ceff266ad856d6f"
+    },
+    {
+      "path": "evidence/recommended-c12-longctx-20261016T041501Z.json",
+      "size": 3752,
+      "sha256": "a159784f926720a7355c9b4d797e9348cd5e146fddc3cb7a6541387901dc3dec"
+    },
+    {
+      "path": "evidence/recommended-c12-longctx-20261016T041501Z.md",
+      "size": 1552,
+      "sha256": "8cc3c739cb50ff5303ff501f508fb68b76536d12297f9674cb0294d5c50fd55f"
+    },
+    {
+      "path": "evidence/recommended-c12-prefix-reuse-20261016T040944Z.json",
+      "size": 1215,
+      "sha256": "5a949d8eb57c80e0d619aa239f1a42c43333a466ac686085acc843b6f2e9b3ae"
+    },
+    {
+      "path": "evidence/recommended-c12-server-info-20261016T035923Z.json",
+      "size": 35886,
+      "sha256": "280d3096ca1e218703a478f074142ba3728b3f31745c497bc0cfc7d0a13cbe30"
+    },
+    {
+      "path": "evidence/recommended-c12-server-info-post-20261016T040050Z.json",
+      "size": 35945,
+      "sha256": "359b2650ada7b8220989d0fe3c21f768ff9526a76ed2b0f489d53e978c878884"
+    },
+    {
+      "path": "evidence/recommended-c12-validation-20261016T040048Z.md",
+      "size": 3259,
+      "sha256": "803c7cbb0671321001cae8a8ddcbea6b5cac2e4228d34ec7d20a9b0165764d8b"
+    },
+    {
       "path": "tests/README.md",
-      "size": 634,
-      "sha256": "24f10e91a39190d87fbd3b3fa40e11ce55f2e72775370b3aee0b0c44743c953e"
+      "size": 1089,
+      "sha256": "7b95a04632e10c2cf8741313ed3f3efb67d9b8ec49b71a39f5c31b4caa5ee579"
     },
     {
       "path": "tests/benchmark.py",
@@ -132,6 +167,16 @@
       "path": "tests/gen_manifest.py",
       "size": 2714,
       "sha256": "2068ee0f0b1dc6ffb0b79e6eeded7c88d7e5e2052491d1430166c9712b8b5cc3"
+    },
+    {
+      "path": "tests/long_context_retrieval.py",
+      "size": 11045,
+      "sha256": "e7c8fe860feab7b780249ab98c54c6a7418d4c0cc672e9fb28d27e223b25acdd"
+    },
+    {
+      "path": "tests/prefix_reuse_probe.py",
+      "size": 6688,
+      "sha256": "313fbfa81e0c67151907ca1ed097bbbcefe2b6d349fc8c9156b68f1f088bfdb5"
     },
     {
       "path": "tests/smoke_test.py",
