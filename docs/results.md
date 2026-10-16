@@ -210,9 +210,20 @@ Prefix reuse on the same server (`extra_buffer`): a second request sharing
 a 2,704-token prefix cached **2,688** tokens; an unrelated prefix cached 0.
 Evidence: `evidence/recommended-c12-prefix-reuse-20261016T040944Z.json`.
 
+## 2026-10-16 — mem-fraction 0.90 + CUDA-graph trims (candidate, not promoted)
+
+One launch of
+[`configs/docker/candidates/qwen27b-mf90-graphtrim.sh`](../configs/docker/candidates/qwen27b-mf90-graphtrim.sh).
+Decode graphs `[1, 2, 4, 8, 12]`, prefill graphs 10 shapes through 2048,
+admission still 12. KV pool 708,463 → **779,104 (+10%)**, mamba states
+254 → 277, free mem after init 10.89 → **6.95 GB**. Full benchmark 9/9,
+zero retractions, no OOM; GPU memory did not grow under the suite.
+Speed at c8+ matches the c12 run within noise. Not promoted: the KV gain
+is modest and headroom is 4 GB tighter. Narrative:
+[`evidence/mf90-graphtrim-20261016T042118Z.md`](../evidence/mf90-graphtrim-20261016T042118Z.md).
+
 ## Not measured yet
 
 - Tool-call correctness under load.
-- Backlog still open: `--mem-fraction-static` 0.90 + CUDA-graph trims, and
-  the `extra_buffer_lazy` / `no_buffer` mamba strategies. See
-  [`NEXT_EXPERIMENT.md`](NEXT_EXPERIMENT.md).
+- Backlog still open: `extra_buffer_lazy` / `no_buffer` mamba strategies.
+  See [`NEXT_EXPERIMENT.md`](NEXT_EXPERIMENT.md).

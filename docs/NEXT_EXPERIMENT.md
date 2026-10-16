@@ -41,8 +41,10 @@ and need an explicit go-ahead before they run.
 
 ## Backlog (not scheduled)
 
-- `--mem-fraction-static` 0.85 → 0.90 + CUDA-graph batch-size trims (~+12-15%
-  to every pool number; validate headroom under load).
+- `--mem-fraction-static` 0.85 → 0.90 + CUDA-graph batch-size trims —
+  **measured 2026-10-16, not promoted**. KV pool +10% (708,463 → 779,104),
+  headroom after init 10.89 → 6.95 GB, benchmark 9/9 with no OOM. Short of
+  the ~12–15% estimate. `evidence/mf90-graphtrim-20261016T042118Z.md`.
 - `--mamba-radix-cache-strategy extra_buffer_lazy` (4 slots/req) or
   `no_buffer` (3 slots/req) — raises the request cap; verify prefix-reuse
   behavior.

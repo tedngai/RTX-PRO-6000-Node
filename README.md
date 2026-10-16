@@ -80,9 +80,10 @@ Evidence: [c12 validation report](evidence/recommended-c12-validation-20261016T0
   context, did quote a planted function exactly — see
   `evidence/recommended-c12-longctx-20261016T041501Z.md` — but that is one
   needle, not a tool-call eval).
-- `--mem-fraction-static` 0.90 + CUDA-graph batch trims, and the
-  `extra_buffer_lazy` / `no_buffer` mamba strategies (backlog in
-  `docs/NEXT_EXPERIMENT.md`).
+- `extra_buffer_lazy` / `no_buffer` mamba strategies (still backlog;
+  `docs/NEXT_EXPERIMENT.md`). `--mem-fraction-static` 0.90 was measured
+  and left unpromoted (KV +10%, headroom 6.95 GB, no OOM under the
+  benchmark).
 - Anything multi-GPU (GPU 1 is untouched; TP>1 would need the NCCL fallback).
 
 ## Repository contents

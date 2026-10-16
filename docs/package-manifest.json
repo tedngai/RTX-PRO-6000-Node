@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-16T04:16:52Z",
+  "generated_at": "2026-10-16T04:22:00Z",
   "repository": "RTX-PRO-6000-Node",
-  "file_count": 39,
+  "file_count": 43,
   "files": [
     {
       "path": ".gitignore",
@@ -15,8 +15,8 @@
     },
     {
       "path": "README.md",
-      "size": 6792,
-      "sha256": "7aad3bd1fc2c2690a621a1ece8c26ca69f6a4ca58bc1645bf8f42dbc331f9cf0"
+      "size": 6854,
+      "sha256": "1ae273ad0ed7bb4a98a8dbaa726f6ddfeed22d0a142dd27a9cb73daf1f6639ce"
     },
     {
       "path": "configs/docker/README.md",
@@ -75,8 +75,8 @@
     },
     {
       "path": "docs/NEXT_EXPERIMENT.md",
-      "size": 3375,
-      "sha256": "693b34adf013dcd5237041be5411691820c757cbda765d5c2123fac33cf78533"
+      "size": 3541,
+      "sha256": "6fcacfd0c3a058bdf918fb3be4894a44c34bb7bba321193d3652cf56e2d13bf5"
     },
     {
       "path": "docs/TESTING.md",
@@ -85,8 +85,8 @@
     },
     {
       "path": "docs/results.md",
-      "size": 10741,
-      "sha256": "109f216410d215a0dbb900487fd62b86a567d75cccdd5cb2b10e4257a106c399"
+      "size": 11402,
+      "sha256": "e16bb22f261dcf1832f14f2c1faadf7ac9a4110c5f5ae8f3890a73582880bb13"
     },
     {
       "path": "evidence/README.md",
@@ -117,6 +117,26 @@
       "path": "evidence/gpu0-wedge-20261016.md",
       "size": 2622,
       "sha256": "eae3dee24ece3ea4a329f9c2ef53e0c354b17d4328bb8f30bc27f9f5c20c775b"
+    },
+    {
+      "path": "evidence/mf90-graphtrim-20261016T042118Z.md",
+      "size": 2626,
+      "sha256": "6c0ed7fd60a84b165f1f5d517f0822e0f1dde9b17ab16de7ecc976bef68f9d15"
+    },
+    {
+      "path": "evidence/mf90-graphtrim-bench-20261016T042118Z.json",
+      "size": 146024,
+      "sha256": "a5fc5ea30b47f7f157608b7da8aa2330afbf27f6e90012ad630a112521978eb4"
+    },
+    {
+      "path": "evidence/mf90-graphtrim-server-info-20261016T041948Z.json",
+      "size": 35552,
+      "sha256": "96440af3d707f72c197f9b63550c47925125772ee5bd7d893b647cec7baa355b"
+    },
+    {
+      "path": "evidence/mf90-graphtrim-server-info-post-20261016T042132Z.json",
+      "size": 35610,
+      "sha256": "20d139da32b48ad975fca1ec5ef826da6ba46c13ed676ee0efa5ccabfddd4f10"
     },
     {
       "path": "evidence/mtp-eagle-314-bench-20261016T023049Z.json",
