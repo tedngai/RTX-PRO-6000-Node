@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-16T04:16:02Z",
+  "generated_at": "2026-10-16T04:16:52Z",
   "repository": "RTX-PRO-6000-Node",
-  "file_count": 36,
+  "file_count": 39,
   "files": [
     {
       "path": ".gitignore",
@@ -25,8 +25,8 @@
     },
     {
       "path": "configs/docker/candidates/README.md",
-      "size": 414,
-      "sha256": "7d7920125ab87ef768788501209fe49c23eb772e94512f737935566222607927"
+      "size": 500,
+      "sha256": "e71247480831ed86f6672f4dd93740fd57a5c230ad2ef7aa68bb46b93fcedbf7"
     },
     {
       "path": "configs/docker/candidates/qwen27b-dflash-d4-r2.sh",
@@ -37,6 +37,21 @@
       "path": "configs/docker/candidates/qwen27b-dflash-d4.sh",
       "size": 5534,
       "sha256": "469f11853b842e26a3c1841530559451be574169768c57b197b23ff4c586cbc5"
+    },
+    {
+      "path": "configs/docker/candidates/qwen27b-mamba-lazy.sh",
+      "size": 5988,
+      "sha256": "d220814e278b3b9e3fb7b7dceed8602a42900204507b02d04d6e39d11547ce58"
+    },
+    {
+      "path": "configs/docker/candidates/qwen27b-mamba-nobuffer.sh",
+      "size": 5968,
+      "sha256": "848c55b0ea3a1c5a0e0167376a5dcea5d9836a4f6602f24d2228d306fa952c6b"
+    },
+    {
+      "path": "configs/docker/candidates/qwen27b-mf90-graphtrim.sh",
+      "size": 6023,
+      "sha256": "b3c140c091e222c7a6885f02b524f82ca7b32eb23faac72732b9af746ec4dc55"
     },
     {
       "path": "configs/docker/candidates/qwen27b-mtp-eagle-314.sh",
