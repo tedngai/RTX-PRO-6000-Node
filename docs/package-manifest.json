@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-16T02:48:54Z",
+  "generated_at": "2026-10-16T03:01:30Z",
   "repository": "RTX-PRO-6000-Node",
-  "file_count": 24,
+  "file_count": 26,
   "files": [
     {
       "path": ".gitignore",
@@ -45,8 +45,8 @@
     },
     {
       "path": "configs/docker/run_qwen27b_sglang.sh",
-      "size": 5660,
-      "sha256": "13f3d202dfb1d51932839a34196ac6c9ce91fed83b3afb7a492bed604895a7fd"
+      "size": 5906,
+      "sha256": "45459b5b8776f7c7dad3f9ef2b3fa89b216de75921b28260b6148ac2bc253dba"
     },
     {
       "path": "configs/docker/setup_docker_gpu.sh",
@@ -89,6 +89,16 @@
       "sha256": "5e68c704b48f1415e4059c4e90b0e1dfa4121d4c85493003a32ec37b9ce13df2"
     },
     {
+      "path": "evidence/dflash-d4-r2-bench-20261016T024247Z.json",
+      "size": 129354,
+      "sha256": "5a60bbb949a78291aad60a9babf98aae0b24967a6e8b22b187f342d36fdd92de"
+    },
+    {
+      "path": "evidence/dflash-d4-r2-server-info-20261016T024552Z.json",
+      "size": 35915,
+      "sha256": "aac89d6e767c989fea6691e0c8ddb2b74caf6478185787d7415665af8eedda33"
+    },
+    {
       "path": "evidence/mtp-eagle-314-bench-20261016T023049Z.json",
       "size": 129307,
       "sha256": "544be21eb07635ee78806046cef8e0d33246a5ef6f9ab05992446264e282d87c"
@@ -110,8 +120,8 @@
     },
     {
       "path": "tests/benchmark.py",
-      "size": 16769,
-      "sha256": "8e58087a7acc377d8e8e792a48f66ef1f2f90147ac7739f2a4c4a465a3184db5"
+      "size": 17204,
+      "sha256": "a7ae48196368340d9710095a9fe37b23fb58ee1f780236cf112f5dab681b5de7"
     },
     {
       "path": "tests/gen_manifest.py",

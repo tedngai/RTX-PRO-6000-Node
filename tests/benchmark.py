@@ -47,11 +47,13 @@ import urllib.request
 DEFAULT_SCENARIOS = [
     {"name": "short-c1-512x256", "concurrency": 1, "in_tokens": 512, "out_tokens": 256},
     {"name": "short-c8-512x256", "concurrency": 8, "in_tokens": 512, "out_tokens": 256},
+    {"name": "short-c12-512x256", "concurrency": 12, "in_tokens": 512, "out_tokens": 256},
     {"name": "short-c16-512x256", "concurrency": 16, "in_tokens": 512, "out_tokens": 256},
     {"name": "short-c32-512x256", "concurrency": 32, "in_tokens": 512, "out_tokens": 256},
     {"name": "short-c45-512x256", "concurrency": 45, "in_tokens": 512, "out_tokens": 256},
     {"name": "long-c1-16384x256", "concurrency": 1, "in_tokens": 16384, "out_tokens": 256},
     {"name": "long-c4-16384x256", "concurrency": 4, "in_tokens": 16384, "out_tokens": 256},
+    {"name": "long-c12-16384x256", "concurrency": 12, "in_tokens": 16384, "out_tokens": 256},
 ]
 
 # Deterministic prompt vocabulary: ordinary English words, no tokenizer needed.
@@ -294,7 +296,8 @@ def main() -> int:
     ap.add_argument("--save-dir", default=None,
                     help="write the report JSON here (e.g. evidence)")
     ap.add_argument("--only", default=None,
-                    help="substring filter on scenario names")
+                    help="comma-separated scenario-name filters (exact name or "
+                         "prefix ending at a '-' boundary, e.g. 'short-c1,short-c12')")
     ap.add_argument("--skip-long", action="store_true",
                     help="run only the short-prompt scenarios")
     ap.add_argument("--out-tokens", type=int, default=None,
@@ -316,10 +319,14 @@ def main() -> int:
             continue
         if args.only:
             name = s["name"]
-            matched = name == args.only or (
-                name.startswith(args.only) and name[len(args.only):len(args.only) + 1] == "-"
-            )
-            if not matched:
+
+            def matches(filter_str: str) -> bool:
+                return filter_str == name or (
+                    name.startswith(filter_str)
+                    and name[len(filter_str):len(filter_str) + 1] == "-"
+                )
+
+            if not any(matches(f.strip()) for f in args.only.split(",") if f.strip()):
                 continue
         s = dict(s)
         if args.out_tokens:

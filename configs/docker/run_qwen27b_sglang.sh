@@ -7,6 +7,9 @@
 # experiments (see docs/results.md): --speculative-num-draft-tokens 4 and
 # --mamba-full-memory-ratio 2.0 raise the shared KV pool from 181,925 to
 # 442,745 tokens with the request cap at 48, at a small speed cost.
+# Updated 2026-10-16 (user requirement): --max-running-requests 12 caps
+# admission at 12 concurrent users, giving each ~36k tokens of the shared
+# 442k-token pool; the engine itself validated up to 48 concurrent.
 #
 # MANUAL USE ONLY. Runs in the foreground; Ctrl+C stops it. There is NO restart
 # policy, no systemd unit, and no auto-restart: if SGLang dies or takes the VM
@@ -125,6 +128,7 @@ docker run \
     --reasoning-parser qwen3 \
     --tool-call-parser qwen3_coder \
     --mamba-full-memory-ratio 2.0 \
+    --max-running-requests 12 \
     --host 0.0.0.0 \
     --port 30000 \
     --speculative-algorithm DFLASH \
